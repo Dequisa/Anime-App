@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import background_image from "./Assets/background_image.png";
 import React from "react";
@@ -28,21 +28,11 @@ import ReviewPage from "./Pages/ReviewPage";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const [animes, setAnimes] = useState([]);
-  const [originalAnimeList, setOriginalAnimeList] = useState([]);
-
+  // Scroll to top of page
   useEffect(() => {
-    const getanimes = async () => {
-      try {
-        const res = await axios.get("http://localhost:3001/animes");
-        setOriginalAnimeList(res.data.payload);
-        setAnimes(res.data.payload);
-      } catch (err) {
-        console.log("Error Response from anime Search request", err);
-      }
-    };
-    getanimes();
+    window.scrollTo(0, 0);
   }, []);
+
   return (
     <div className="App">
       <Router>

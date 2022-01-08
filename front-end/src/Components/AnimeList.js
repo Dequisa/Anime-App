@@ -1,19 +1,25 @@
 import AnimeListItem from "./AnimeListItem";
+import Pagination from "./Pagination";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "../CSS/AnimeList.css";
 
 function AnimeList({ rez }) {
   const [animes, setAnimes] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  // const [inputValue, setInputValue] = useState("");
   const [originalAnimeList, setOriginalAnimeList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [animesPerPage] = useState(3);
+  // const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getanimes = async () => {
+      // setLoading(true);
       try {
         const res = await axios.get("http://localhost:3001/animes");
         setOriginalAnimeList(res.data.payload);
         setAnimes(res.data.payload);
+        // setLoading(false);
       } catch (err) {
         console.log("Error Response from anime Search request", err);
       }
@@ -35,9 +41,12 @@ function AnimeList({ rez }) {
     setAnimes(filteredAnimes);
   };
 
-  // const handleSearch = () => {
-
-  // };
+  //  Get current anime
+  const indexOfLastAnime = currentPage * animesPerPage;
+  const indexOfFirstAnime = indexOfLastAnime - animesPerPage;
+  const currentAnime = animes.slice(indexOfFirstAnime, indexOfLastAnime);
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="List">
       <div className="searchBar">
@@ -46,7 +55,7 @@ function AnimeList({ rez }) {
         {/* <button onClick={handleSearch}>SEARCH</button> */}
       </div>
       <div>
-        {animes.map((anime) => (
+        {currentAnime.map((anime) => (
           <AnimeListItem
             key={anime.anime_id}
             anime={anime}
@@ -54,6 +63,11 @@ function AnimeList({ rez }) {
           />
         ))}
       </div>
+      <Pagination
+        animesPerPage={animesPerPage}
+        totalPosts={animes.length}
+        paginate={paginate}
+      />
     </div>
   );
 }

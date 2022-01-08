@@ -22,8 +22,9 @@ require("./config/passport");
 app.use(
   cors({
     credentials: true,
-    origin:
-      "http://localhost:3000" || "https://blissful-kepler-8aa07a.netlify.app", // where this is where your frontend currently runs.
+    origin: "https://36db-2603-7000-9800-498c-2836-aa1c-1b0f-cf52.ngrok.io",
+    // origin: "http://localhost:3000", // where this is where your frontend currently runs.
+    // "https://elastic-einstein-7f8f1c.netlify.app"
   })
 );
 

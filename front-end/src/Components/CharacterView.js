@@ -1,8 +1,8 @@
 import "../CSS/CharDetailPage.css";
-import { useState } from "react";
+// import { useState } from "react";
 
 function CharacterView({ character }) {
-  const [isFlipped, setIsFlipped] = useState(false);
+  // const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();

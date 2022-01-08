@@ -15,7 +15,7 @@ function AnimeListItem({ anime }) {
       <div className="listDetails">
         <h5>{anime.description}</h5>
         <h5>Recommended Age Range:</h5>
-        // <h5>Age 8 and up</h5>
+        <h5>Age 8 and up</h5>
       </div>
     </div>
 

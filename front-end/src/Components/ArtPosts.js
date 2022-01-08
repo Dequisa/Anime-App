@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+// import axios from "axios";
 import "../CSS/Art.css";
-import FormData from "form-data";
-const { REACT_APP_BEARER_TOKEN } = process.env;
+// import FormData from "form-data";
+// const { REACT_APP_BEARER_TOKEN } = process.env;
 
 let imageText = "";
 function ArtPosts() {
-  const [selectedFile, setSelectedFile] = useState("");
+  const [selectedFile, setSelectedFile] = useState([]);
 
   const onFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
+    console.log(selectedFile);
 
     function read(callback) {
       var file = event.target.files[0];
@@ -30,23 +31,24 @@ function ArtPosts() {
   };
 
   const onUploadClick = async (e) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Client-ID REACT_APP_BEARER_TOKEN`);
+    console.log("file uploaded");
+    // var myHeaders = new Headers();
+    // myHeaders.append("Authorization", `Client-ID REACT_APP_BEARER_TOKEN`);
 
-    var formdata = new FormData();
-    formdata.append("image", imageText);
+    // var formdata = new FormData();
+    // formdata.append("image", imageText);
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
+    // var requestOptions = {
+    //   method: "POST",
+    //   headers: myHeaders,
+    //   body: formdata,
+    //   redirect: "follow",
+    // };
 
-    fetch("https://api.imgur.com/3/image", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    // fetch("https://api.imgur.com/3/image", requestOptions)
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log("error", error));
   };
 
   // let art = await axios.post("http://localhost:3001/upload");
@@ -82,6 +84,7 @@ function ArtPosts() {
         </form>
       </div>
       <img src="http://localhost:3001/upload/" alt="artwork"></img>
+      <img src={selectedFile} className="githubIcon" alt="github cat" />
     </div>
   );
 }

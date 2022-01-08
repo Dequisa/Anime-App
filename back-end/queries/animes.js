@@ -6,7 +6,7 @@ const db = require("../db/config.js");
 
 const fetchAnimes = async () => {
   try {
-    const animes = await db.any("SELECT * FROM  animes");
+    const animes = await db.any("SELECT * FROM  animes ORDER BY title ASC");
     return animes;
   } catch (err) {
     console.log(err);
